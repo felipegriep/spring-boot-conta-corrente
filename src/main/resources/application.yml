@@ -1,6 +1,23 @@
 server:
   port: 8080
 spring:
+  application:
+    name: conta-corrente
   data:
     mongodb:
-      uri: mongodb://localhost:27017/workshop-springboot
+      uri: ${mongo_url:mongodb://localhost:27017/workshop-springboot}
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        prefix: config
+        defaultContext: apps
+        profileSeparator: '::'
+security:
+  basic:
+    enabled: ${security_enabled:false}
+  user:
+    name: test
+    password: test
