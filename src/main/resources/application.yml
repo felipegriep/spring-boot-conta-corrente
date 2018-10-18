@@ -21,3 +21,9 @@ security:
   user:
     name: test
     password: test
+logging:
+  level:
+    root: ${logging_level:INFO}
+service:
+  spring-boot-demo:
+    url: http://localhost:9090/api/spring-boot-demo/cpf/{cpf}

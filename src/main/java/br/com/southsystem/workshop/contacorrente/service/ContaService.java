@@ -14,12 +14,16 @@ import java.util.Optional;
 public class ContaService {
 
     private final ContaRepository contaRepository;
+    private final CPFRemoteService cpfRemoteService;
 
-    public ContaService(ContaRepository contaRepository) {
+    public ContaService(ContaRepository contaRepository, CPFRemoteService cpfRemoteService) {
         this.contaRepository = contaRepository;
+        this.cpfRemoteService = cpfRemoteService;
     }
 
     public Conta insert(Conta conta) {
+        cpfRemoteService.findNomeByCpf(conta.getCpf())
+                .ifPresent(result -> conta.setNome(result.get("name")));
         return contaRepository.save(conta);
     }
 
