@@ -15,6 +15,21 @@ spring:
         prefix: config
         defaultContext: apps
         profileSeparator: '::'
+    stream:
+      bindings:
+        contaCorrenteCriada:
+          destination: conta-corrente-criada
+          group: conta-corrente-criada-group
+      binders:
+        rabbitMQ:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                addresses: ${rabbit.addresses:localhost:5672}
+                username: ${rabbit.username:guest}
+                password: ${rabbit.password:guest}
+                virtual-host: ${rabbit.virtualhost:/}
 security:
   basic:
     enabled: ${security_enabled:false}

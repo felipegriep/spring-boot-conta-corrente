@@ -1,0 +1,26 @@
+version: '3'
+services:
+ mongo:
+   image: mongo:3
+   ports:
+     - "27017:27017"
+ consul1:
+   image: "consul:0.9.3"
+   container_name: "consul1"
+   hostname: "consul1"
+   ports:
+     - "8300:8300"
+     - "8400:8400"
+     - "8500:8500"
+     - "8600:53"
+ rabbitmq:
+   image: "rabbitmq:3-management"
+   hostname: "rabbit"
+   ports:
+     - "15672:15672"
+     - "5672:5672"
+   labels:
+     NAME: "rabbitmq"
+   volumes:
+     - ./rabbitmq-user-guest.conf
+
